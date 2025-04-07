@@ -29,6 +29,7 @@ public class TaskController {
 		this.taskService = taskService;
 	}
 	
+	
 	@GetMapping
 	public String getAllTasks(Model model) {
 		List<Task> tasks = taskService.getAllTasks();
@@ -37,7 +38,12 @@ public class TaskController {
 		return "tasks";
 	}
 	
-	@PostMapping
+	@GetMapping("/add-task")
+	public String addTask() {
+		return "addTask";
+	}
+	
+	@PostMapping("/create-task")
 	public String createTask(@RequestParam String title) {
 		taskService.createTask(title);
 		logger.info("Created task and redirected to task home page with title :"+title);
@@ -54,7 +60,7 @@ public class TaskController {
 	@GetMapping("/{id}/toggle")
 	public String toggleTask(@PathVariable Long id) {
 		taskService.toggleTask(id);
-		logger.info("Task completed and redirected to task home page with id :"+id);
+		logger.info("Task toggled and redirected to task home page with id :"+id);
 		return "redirect:/task-home";
 	}
 	
