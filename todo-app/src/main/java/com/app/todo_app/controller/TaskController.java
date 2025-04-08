@@ -44,9 +44,22 @@ public class TaskController {
 	}
 	
 	@PostMapping("/create-task")
-	public String createTask(@RequestParam String title) {
-		taskService.createTask(title);
+	public String createTask(@RequestParam String title,@RequestParam String description) {
+		taskService.createTask(title,description);
 		logger.info("Created task and redirected to task home page with title :"+title);
+		return "redirect:/task-home";
+	}
+	
+	@GetMapping("/{id}/edit")
+	public String editTask(@PathVariable Long id, Model model) {
+		model.addAttribute("taskId", id);
+		return "editTask";
+	}
+	
+	@PostMapping("/update-task")
+	public String updateTask(@RequestParam Long id, @RequestParam String title,@RequestParam String description) {
+		taskService.updateTask(id, title,description);
+		logger.info("task updated and redirected to task home page with title :"+title);
 		return "redirect:/task-home";
 	}
 	

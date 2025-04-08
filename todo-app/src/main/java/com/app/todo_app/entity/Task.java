@@ -12,18 +12,21 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
+	private String description;
 	private boolean completed;
+	
 	
 	public Task() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Task(Long id, String title, boolean completed) {
+	public Task(Long id, String title,String description, boolean completed) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.completed = completed;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -48,6 +51,15 @@ public class Task {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
-	}	
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 
 }

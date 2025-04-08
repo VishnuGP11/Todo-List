@@ -27,9 +27,10 @@ public class TaskService {
 		
 	}
 
-	public void createTask(String title) {
+	public void createTask(String title, String description) {
 		Task task = new Task();
 		task.setTitle(title);
+		task.setDescription(description);
 		task.setCompleted(false);
 		taskRepository.save(task);
 		
@@ -45,9 +46,18 @@ public class TaskService {
 		Task task = taskRepository.findById(id)
 				    .orElseThrow(() -> new IllegalArgumentException("Invalid id provided"));
 		task.setCompleted(!task.isCompleted());
-		System.out.println("Task completed value changed to :"+task.isCompleted());
+		System.out.println("Task toggled value changed to :"+task.isCompleted());
 		System.out.println("Task saved to DB! ");
 		taskRepository.save(task);
+	}
+
+	public void updateTask(Long id, String title, String description) {
+		Task task = taskRepository.findById(id)
+			    .orElseThrow(() -> new IllegalArgumentException("Invalid id provided"));
+		task.setTitle(title);
+		task.setDescription(description);
+		taskRepository.save(task);
+		
 	}
 	
 	
